@@ -2,6 +2,6 @@
 public class First {
 	public static void main(String[] args) {
 		System.out.println("hello world");
-		int x = System.in.read();
+//		int x = System.in.read();
 	}
 }

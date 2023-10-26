@@ -6,4 +6,10 @@ public class Square extends Polygon{
 	public double calcArea() {
 		return side*side;
 	}
+	public Square(int x, int y, double side) {
+		super(x, y, 4);
+		this.side = side;
+	}
+	
+	
 }

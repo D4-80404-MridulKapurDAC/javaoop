@@ -9,18 +9,18 @@ public class Program {
 		System.out.println("Enter employee cnt : ");
 		int empcnt = sc.nextInt();
 		Employee[] mployees = new Employee[empcnt];
-		for(Employee e:mployees) {
+		for(int i = 0 ;i<mployees.length;i++) {
 			System.out.println("1.Lab 2.clerk 3.Sales");
 			int ch = sc.nextInt();
 			if(ch == 1) {
-				e = new Labor();
+				mployees[i]= new Labor();
 			}else if(ch == 2) {
-				e = new Clerk();
+				mployees[i] = new Clerk();
 			}else {
-				e = new Salesman();
+				mployees[i] = new Salesman();
 			}
 			try{
-				e.accept();
+				mployees[i].accept();
 			}catch(EmployeeException ex) {
 				System.out.println(ex.getMessage());
 			}

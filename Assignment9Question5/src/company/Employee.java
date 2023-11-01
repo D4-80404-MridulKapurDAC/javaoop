@@ -67,7 +67,9 @@ public abstract class Employee extends Person {
 
 	@Override
 	public String toString() {
-		return super.toString() + String.format("Employee [salary=%s, id=%s]", salary, id);
+		StringBuilder builder = new StringBuilder(super.toString());
+		builder.append("Employee [salary=").append(salary).append(", id=").append(id).append("]");
+		return builder.toString();
 	}
 	
 	

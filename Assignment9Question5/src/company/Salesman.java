@@ -79,9 +79,11 @@ public class Salesman extends Employee {
 
 	@Override
 	public String toString() {
-		return super.toString() + String.format("Salesman [target=%s, commission=%s]", target, commission);
+		StringBuilder builder = new StringBuilder(super.toString());
+		builder.append("Salesman [target=").append(target).append(", commission=").append(commission).append("]");
+		return builder.toString();
 	}
-	
+
 	
 	
 }

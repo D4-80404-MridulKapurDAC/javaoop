@@ -2,9 +2,20 @@ package pkg;
 //import A;
 
 public class Child extends Parent{
-	public static void main(String ...args) {
-		int x  = 88888;
-		String y  = Integer.toString(x,8);
-		System.out.println(y);
+	int c;
+	
+	public Child(int gp, int p,int c) {
+		super(gp, p);
+		this.c = c;
+		// TODO Auto-generated constructor stub
+	}
+
+	public void ch() {
+		System.out.println("child");
+	}
+	
+	@Override
+	public void over() {
+		System.out.println("over child");
 	}
 }

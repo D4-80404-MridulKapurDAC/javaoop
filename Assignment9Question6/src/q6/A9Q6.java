@@ -20,6 +20,7 @@ public class A9Q6 {
 			ch = Menu.values()[sc.nextInt() - 1];
 			switch(ch) {
 				case ACCEPT:{ 
+					p[curr] = new Person();
 					p[curr].accept();
 					curr++;
 					break;
@@ -50,10 +51,5 @@ public class A9Q6 {
 			}
 		}
 	}
-	}
-
 }
 
-public static void main(String[] args) {}}
-		
-}

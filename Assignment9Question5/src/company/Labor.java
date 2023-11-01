@@ -78,7 +78,9 @@ public class Labor extends Employee {
 
 	@Override
 	public String toString() {
-		return super.toString() + String.format("Labor:\nrate=%d\nhours=",rate,hours);
+		StringBuilder builder = new StringBuilder(super.toString());
+		builder.append("Labor [rate=").append(rate).append(", hours=").append(hours).append("]");
+		return builder.toString();
 	}
 	
 	

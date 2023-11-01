@@ -41,7 +41,9 @@ public class Clerk extends Employee {
 
 	@Override
 	public String toString() {
-		return super.toString() + String.format("Clerk",this.salary);
+		StringBuilder builder = new StringBuilder(super.toString());
+		builder.append("Clerk []");
+		return builder.toString();
 	}
 
 }

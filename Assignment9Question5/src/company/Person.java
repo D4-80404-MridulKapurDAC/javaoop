@@ -58,7 +58,9 @@ public abstract class Person {
 
 	@Override
 	public String toString() {
-		return super.toString() + String.format("Person [name=%s, age=%s]", name, age);
+		StringBuilder builder = new StringBuilder();
+		builder.append("Person [name=").append(name).append(", age=").append(age).append("]");
+		return builder.toString();
 	}
 	
 	

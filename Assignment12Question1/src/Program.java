@@ -1,11 +1,9 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Scanner;
-
-import java.util.Iterator;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 
 class Book implements Comparable<Book>{
 	String isbn;
@@ -87,12 +85,11 @@ class Book implements Comparable<Book>{
 }
 
 
-
 enum CHOICE{
-	ADD,DISPLAY,DELETE_ID,FIND_ISBN,DELETE_ALL,DISPLAY_CNT,DISPLAY_ALL,EXIT;
+	ADD,DISPLAY,SEARCH,DELETE_IDX,DELETE_ISBN,DELETE_NAME,SORT_ISBN,SORT_DESC,REVERSE,DISPLAY_ALL,EXIT;
 }
 
-public class Answer {
+public class Program {
 	public static void main(String[] args) {
 		ArrayList<Book> arr= new ArrayList<Book>();
 		Scanner sc = new Scanner(System.in);
@@ -104,50 +101,83 @@ public class Answer {
 			}
 		}
 		do {
-			System.out.println("1.Add,2.Display,3.DeleteId,4.FIND_ISBN,5.DELETE_ALL,6.DISPLAY_CNT,7.DisplayAll,8.EXIT");
+			System.out.println("1.Add,2.Display,3.Search,4.Delete_idx,5.Delete_isbn,6.Delete_name,7.Sort_isbn,8.Sort_desc,9.Reverse,10.DisplayAll,11.EXIT");
 			ch = CHOICE.values()[sc.nextInt()-1];
 			switch(ch) {
 				case ADD:
-					arr.add(new Book());
-					arr.get(arr.size()-1).accept(sc);
+					Book b = new Book();
+					b.accept(sc);
+					int idx = arr.indexOf(b);
+					if(idx != -1) {
+						arr.get(idx).setQuantity(arr.get(idx).getQuantity() + b.getQuantity());
+					}else {						
+						arr.add(b);
+					}
 					break;
 				case DISPLAY:
-					Arrays.sort(arr);
-//					arr.sort();
-					for(Book b : arr) {
-						System.out.println(b);
+					arr.sort(new SortISBN());
+					for(int i = 0 ; i <arr.size();i++) {
+						System.out.println(arr.get(i));
 					}
 					break;
-				case DELETE_ID:
-					Book temp = new Book();
-					temp.setIsbn(sc.next());
-					arr.remove(temp);
+				case SEARCH:
+					b = new Book();
+					b.setIsbn(sc.next());
+					idx = arr.indexOf(b);
+					if(idx!=-1) {
+						System.out.println(arr.get(idx));
+					}else {
+						System.out.println("Not Found");
+					}
 					break;
-				case FIND_ISBN:
-					String toFin = sc.next();
-					for(int i = 0 ; i < arr.size();i++) {
-						if(arr.get(i).getIsbn().compareTo(toFin) == 0) {
-							System.out.println(arr.get(i));
+				case DELETE_IDX:
+					idx = sc.nextInt();
+					arr.remove(idx);
+					break;
+				case DELETE_ISBN:
+					b = new Book();
+					b.setIsbn(sc.next());
+					arr.remove(b);
+					break;
+				case DELETE_NAME:
+					b = new Book();
+					b.setAuthorName(sc.next());
+					for(int i = 0;i<arr.size();i++) {
+						if(arr.get(i).getAuthorName().compareTo(b.getAuthorName()) == 0) {
+							arr.remove(i);
 							break;
 						}
+//						arr[i] -> arr.get(i)
 					}
 					break;
-				case DELETE_ALL:
-					arr.removeAll(arr);
+				case SORT_ISBN:
+					Collections.sort(arr);
 					break;
-				case DISPLAY_CNT:
-					System.out.println(arr.size());
+				case SORT_DESC:
+					class DescSort implements Comparator<Book>{
+
+						@Override
+						public int compare(Book arg0, Book arg1) {
+							return arg1.getPrice().compareTo(arg0.getPrice());
+						}
+						
+					}
+					Collections.sort(arr,new DescSort());
+					break;
+				case REVERSE:
+					Collections.reverse(arr);
 					break;
 				case DISPLAY_ALL:
-					int totalBooks = 0;
 					Iterator<Book> itr = arr.iterator();
 					while(itr.hasNext()) {
-						Book b = itr.next();
-						totalBooks += b.getQuantity();
+						Book prnt = itr.next();
+						System.out.println(prnt);
 					}
-					System.out.println(totalBooks);
+					break;
+				default:
 					break;
 			}
 		}while(ch!=CHOICE.EXIT);
 	}
 }
+

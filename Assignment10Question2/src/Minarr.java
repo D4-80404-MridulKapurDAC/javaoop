@@ -3,8 +3,9 @@ public class Minarr {
 	public static <T extends Number> T findmin(T[] arr) {
 		if(arr.length == 0) {
 			Integer num = new Integer(5);
-			
-			return (T) num;
+//			T n1 = (T) num;
+//			T[] n1 = new T[5];
+			return (T) num;//DOUBT
 		}
 		
 		int minIdx = 0;
